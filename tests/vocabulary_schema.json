@@ -1,0 +1,140 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/vbvss199/Language-Learning-decks/vocabulary_schema.json",
+  "title": "Language Learning Vocabulary Entry",
+  "description": "Schema for vocabulary flashcard entries across all language learning decks. Core fields are required, while language-specific fields are optional.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "useful_for_flashcard",
+      "cefr_level",
+      "english_translation",
+      "example_sentence_english",
+      "pos",
+      "word_frequency"
+    ],
+    "properties": {
+      "word": {
+        "type": "string",
+        "minLength": 1,
+        "description": "The vocabulary word in the target language (lemmatized/base form). Note: Some languages like Arabic may use alternative field names."
+      },
+      "useful_for_flashcard": {
+        "type": ["boolean", "null"],
+        "description": "Whether this word is suitable for flashcard learning. Can be null if not determined."
+      },
+      "cefr_level": {
+        "type": "string",
+        "enum": ["A1", "A2", "B1", "B2", "C1", "C2", "Unknown"],
+        "description": "Common European Framework of Reference difficulty level. 'Unknown' indicates the word has not yet been classified."
+      },
+      "english_translation": {
+        "type": "string",
+        "description": "English translation(s) of the word, separated by semicolons if multiple. Can be empty string in rare cases."
+      },
+      "example_sentence_native": {
+        "type": "string",
+        "description": "Example sentence using the word in the target language. May be omitted for English language files. Can be empty string."
+      },
+      "example_sentence_english": {
+        "type": "string",
+        "description": "English translation of the example sentence. Can be empty string in rare cases."
+      },
+      "pos": {
+        "type": "string",
+        "enum": [
+          "noun", "verb", "adjective", "adverb", "pronoun", 
+          "preposition", "conjunction", "interjection", 
+          "numeral", "determiner", "particle", "auxiliary",
+          "n", "v", "adj", "adv", "prep", "conj", "interj", 
+          "num", "det", "part", "aux",
+          "verbs", "nom",
+          "adjective & adverb", "adverbial phrase", "clipping","adverbs", "postposition", "prepositional phrase",
+          "v1", 
+          "number", "no", "numeral/measure word", "numeral/noun", "numeral-measure word", "measure word",
+          "[pos_edited]", "[pos_edited] adverb", "[pos_edited] verb", "[pos_edited] noun", "[pos_edited] adjective", 
+          "[keep as-is]", "[as-is]", "[keep]", "keep as-is",
+          "symbol", "phrase","idiom",
+          "suffix", "prefix",
+          "adjektiv", "sentence", "auxiliary verb",
+          "discard","unclear",
+          "none","",
+          "वशषण", "करय", "सजञ", "tigrão", "aia",
+          "bitter","veras", "yakuza", "vodka","pinus",
+          "pole","multiuso", "cégep", "luau",
+          "cheikh","hidalgo", "anus", "classifier",
+          "violette","sketch", "soft", "rétro"
+        ],
+        "description": "Part of speech category for the word. Supports multiple formats: full English names (noun, verb, etc.), abbreviated forms (n, v, adj, adv), language-specific terms (nom for French), compound forms (adjective & adverb), special categories (clipping, adverbial phrase, number), placeholders ([pos_edited], [keep as-is], [as-is], [keep], keep as-is, none), non-Latin scripts (वशषण, करय in Hindi), data errors (bitter, tigrão), and empty string for unspecified."
+      },
+      "word_frequency": {
+        "type": "integer",
+        "minimum": 0,
+        "description": "Frequency ranking number (lower = more common). Can be 0 for unranked words."
+      },
+      "romanization": {
+        "type": "string",
+        "description": "OPTIONAL: Romanized/transliterated version of the word. Common in non-Latin script languages (Arabic, Japanese, Korean, Mandarin, Russian, Hindi, etc.). Can be empty string if not available."
+      },
+      "language_variety": {
+        "type": "string",
+        "enum": ["brazilian", "european", "mixed", "generic"],
+        "description": "OPTIONAL: Language variant/dialect. Used in Portuguese files to distinguish between Brazilian and European Portuguese."
+      },
+      "gender": {
+        "type": "string",
+        "enum": ["masculine", "feminine", "neuter", "Unknown", ""],
+        "description": "OPTIONAL: Grammatical gender. Used in languages like German, French, Italian, etc. Can be empty string or 'Unknown'."
+      },
+      "article_with_word": {
+        "type": "string",
+        "description": "OPTIONAL: Word with definite article (e.g., 'le chat' in French). Helps learners remember gender/article usage."
+      },
+      "diacritized_word": {
+        "type": "string",
+        "description": "OPTIONAL: Word with diacritical marks. Used in Arabic and other languages with optional diacritics."
+      },
+      "diacritized_words": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "OPTIONAL: Array of diacritized word forms. Used in Arabic."
+      },
+      "diacritized_word_sensitive": {
+        "type": ["string", "boolean"],
+        "description": "OPTIONAL: Alternative diacritized form or sensitivity flag. Used in Arabic."
+      },
+      "root_word": {
+        "type": "string",
+        "description": "OPTIONAL: Root form of the word. Used in Arabic and other Semitic languages."
+      },
+      "is_separable_verb": {
+        "type": "boolean",
+        "description": "OPTIONAL: Indicates if this is a separable verb. Used in German."
+      },
+      "separable_prefix": {
+        "type": "string",
+        "description": "OPTIONAL: The separable prefix for separable verbs. Used in German."
+      },
+      "base_verb": {
+        "type": "string",
+        "description": "OPTIONAL: Base form for separable verbs. Used in German."
+      },
+      "capitalization_sensitive": {
+        "type": "boolean",
+        "description": "OPTIONAL: Whether capitalization matters for this word. Used in German."
+      },
+      "definitions": {
+        "type": ["string", "array", "null"],
+        "items": {
+          "type": "object"
+        },
+        "description": "OPTIONAL: Additional definitions or contextual information. Used in Korean. Can be string, array of objects with hanja/gloss, or null."
+      }
+    },
+    "additionalProperties": false
+  },
+  "minItems": 1
+}

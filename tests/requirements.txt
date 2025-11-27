@@ -1,0 +1,3 @@
+# Requires Python 3.8 or higher
+pytest>=7.0.0
+jsonschema>=4.0.0
